@@ -1,7 +1,7 @@
 module CpOraclecloud
   class DatabaseInstance < CloudInstance
 
-		def provision_instance
+		def provision
 			connection.instances.create(init_config)
 		end
 
@@ -11,15 +11,6 @@ module CpOraclecloud
 
 		def cloud_type
 			"Database"
-		end
-
-		def status 
-			begin
-				@instance ||= connection.instances.get(name)
-				@instance.status
-			rescue Fog::OracleCloud::Database::NotFound
-				"Error"
-			end
 		end
 
 		def fog

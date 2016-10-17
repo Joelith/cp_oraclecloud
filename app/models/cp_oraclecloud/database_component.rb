@@ -34,6 +34,10 @@ module CpOraclecloud
       "OracleCloud"
     end
 
+    def provider
+      "OracleCloud"
+    end
+
     def fog_type
       "Database"
     end
