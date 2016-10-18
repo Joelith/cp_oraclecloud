@@ -1,5 +1,5 @@
 module CpOraclecloud
-  class DatabaseInstance < CloudInstance
+  class JavaInstance < CloudInstance
 
 		def provision
 			connection.instances.create(init_config)
@@ -14,7 +14,7 @@ module CpOraclecloud
 		end
 
 		def cloud_type
-			"Database"
+			"Java"
 		end
 
 		def fog
@@ -33,10 +33,6 @@ module CpOraclecloud
 
 		def month_cost
 			cost = 0
-			if init_config['edition'] == 'EE_EP' then
-					rc = RateCard.where("provider = ? AND key = ?", provider, 'Database Cloud Service Enterprise Edition Extreme Performance').first
-					rc ? cost = rc.value : 0
-			end
 			cost
 		end
 
@@ -47,7 +43,7 @@ module CpOraclecloud
 		end
 
 		def connection 
-	 		@connection ||= Fog::OracleCloud::Database.new(
+	 		@connection ||= Fog::OracleCloud::Java.new(
 	      :oracle_username => APP_CONFIG[:oracle_username],
 	      :oracle_password => APP_CONFIG[:oracle_password],
 	      :oracle_domain => APP_CONFIG[:oracle_domain],

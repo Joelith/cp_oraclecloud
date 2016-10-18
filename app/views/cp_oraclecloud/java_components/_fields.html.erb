@@ -1,0 +1,68 @@
+<em>Required fields are on the General and Database tabs. You can ignore the rest if needed</em>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#general" data-toggle="tab">* General</a></li>
+  <li role="presentation"><a href="#database" data-toggle="tab"> * Database</a></li>
+  <li role="presentation"><a href="#storage" data-toggle="tab"> Storage</a></li>
+  <li role="presentation"><a href="#networking" data-toggle="tab"> Networking</a></li>
+  <li role="presentation"><a href="#config" data-toggle="tab">Server Config</a></li>
+</ul>
+
+
+<div class="tab-content ">
+  <div class="tab-pane active" id="general">
+		<%= f.input :service_name %>
+		<%= f.input :description %>
+		<%= f.input :edition, :label_method=> lambda { |item| "#{item.first.upcase}" } %>
+		<%= f.input :shape %>
+		<%= f.input :num_nodes, label: 'Managed Server Count', as: :integer, hint: 'Valid values: 1, 2, 4, 8' %>
+		<%= f.input :version %>
+		<%= f.input :level, :label_method=> lambda { |item| "#{item.first.upcase}" }  %>
+		<%= f.input :subscription_type, :label_method=> lambda { |item| "#{item.first.upcase}" }  %>
+		<%= f.input :ssh_key %>
+		<%= f.input :admin_username %>
+		<%= f.input :admin_password, input_html: { value: @component.admin_password } %>
+	</div>
+	<div class="tab-pane" id="storage">
+		<em>If you leave these blank, the system will create a storage container with the name '%service_name%_backup'</em>
+		<%= f.input :cloud_storage_container %>
+		<%= f.input :cloud_storage_user %>
+		<%= f.input :cloud_storage_pwd, input_html: { value: @component.cloud_storage_pwd }%>
+		<%= f.input :cloud_storage_if_missing, as: :boolean, label: 'Create storage container if missing?' %>
+		<%= f.input :backup_volume_size, hint: 'In bytes or GBs (with a G). Ie: 100000000000 or 10G' %>
+		<%= f.input :domain_volume_size, hint: 'In bytes or GBs (with a G). Ie: 100000000000 or 10G' %>
+
+	</div>
+	<div class="tab-pane" id="database">
+		<%= f.input :db_service_name %>
+		<%= f.input :dba_name %>
+		<%= f.input :dba_password, input_html: { value: @component.dba_password }%>
+		<%= f.input :pdb_name, hint: 'Will use default PDB is not provided. Only valid for 12c databases' %>
+		
+	</div>
+	<div class="tab-pane" id="networking">
+		<%= f.input :enable_admin_console, as: :boolean, hint: 'Configures networking to the admin console' %>
+		<%= f.input :provision_otd, as: :boolean %>
+		<%= f.input :admin_port, input_html: { placeholder: 7001 } %>
+		<%= f.input :content_port, input_html: { placeholder: 8001 } %>
+		<%= f.input :wls_deployment_channel_port, input_html: { placeholder: 9001 }, label: 'Deployment Channel Port', hint: 'Port used for accessing admin server using WLST' %>
+		<%= f.input :node_manager_port, input_html: { placeholder: 5556 } %>
+		<%= f.input :secured_admin_port, input_html: { placeholder: 7002 } %>
+		<%= f.input :secured_content_port, input_html: { placeholder: 8002 } %>
+
+	</div>
+	<div class="tab-pane" id="config">
+		<%= f.input :cluster_name, hint: 'Leave blank to have %service_name%_cluster' %>	
+		<%= f.input :domain_name, hint: 'Leave blank to have %service_name%_domain' %>	
+		<%= f.input :domain_mode %>
+		<%= f.input :domain_partition_count, as: :integer, hint: 'Valid values: 0, 1, 2, 4' %>
+		<%= f.input :node_manager_username %>
+		<%= f.input :node_manager_password, input_html: { value: @component.node_manager_password } %>
+
+		<%= f.input :ms_initial_heap_mb %>
+		<%= f.input :ms_jvm_args %>
+		<%= f.input :ms_max_heap_mb %>
+		<%= f.input :ms_max_perm_mb %>
+		<%= f.input :overwrite_ms_jvm_args %>
+		<%= f.input :sample_app_deployment_requested, as: :boolean %>
+	</div>
+</div>
