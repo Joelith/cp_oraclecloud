@@ -20,25 +20,17 @@ Or install it yourself as:
 ```bash
 $ gem install cp_oraclecloud
 ```
-You need to add some configuration options to a yml file for this plugin to correctly connect to the Cloud Platform. To do so, add the following to config/config.yml:
+Configuration options need to be added to an initliazer in your app. Eg: in config/initializers/cp_oraclecloud.rb
 
-```yaml
----
-defaults: &defaults
-  oracle_username: <username>
-  oracle_password: <password>
-  oracle_domain: <identity domain>
-  oracle_compute_api: <compute api>
-  oracle_region: <region, remove for us data centre>
-  oracle_storage_api: <storage api>
-development:
-  <<: *defaults
-
-test:
-  <<: *defaults
-
-production:
-  <<: *defaults
+```ruby
+CpOraclecloud.setup do |config|
+  config.username = <username>
+  config.password = <password>
+  config.domain = <domain>
+  config.region = <region, remove if using US data centres>
+  config.compute_api = <compute url>
+  config.storage_api = <storage url>
+end
 ```
 ## Contributing
 Contribution directions go here.
