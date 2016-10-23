@@ -48,10 +48,10 @@ module CpOraclecloud
 
 		def connection 
 	 		@connection ||= Fog::OracleCloud::Database.new(
-	      :oracle_username => CpOraclecloud::FOG_CONFIG[:oracle_username],
-	      :oracle_password => CpOraclecloud::FOG_CONFIG[:oracle_password],
-	      :oracle_domain => CpOraclecloud::FOG_CONFIG[:oracle_domain],
-	      :oracle_region => CpOraclecloud::FOG_CONFIG[:oracle_region],
+	      :oracle_username => CpOraclecloud.username,
+	      :oracle_password => CpOraclecloud.password,
+	      :oracle_domain => CpOraclecloud.domain,
+	      :oracle_region => CpOraclecloud.region
 	      )
 		end
 
