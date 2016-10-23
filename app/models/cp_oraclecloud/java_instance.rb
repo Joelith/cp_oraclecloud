@@ -44,9 +44,10 @@ module CpOraclecloud
 
 		def connection 
 	 		@connection ||= Fog::OracleCloud::Java.new(
-	      :oracle_username => APP_CONFIG[:oracle_username],
-	      :oracle_password => APP_CONFIG[:oracle_password],
-	      :oracle_domain => APP_CONFIG[:oracle_domain],
+	      :oracle_username => CpOraclecloud::FOG_CONFIG[:oracle_username],
+	      :oracle_password => CpOraclecloud::FOG_CONFIG[:oracle_password],
+	      :oracle_domain => CpOraclecloud::FOG_CONFIG[:oracle_domain],
+	      :oracle_region => CpOraclecloud::FOG_CONFIG[:oracle_region],
 	      )
 		end
 
