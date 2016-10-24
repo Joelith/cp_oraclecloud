@@ -8,6 +8,7 @@ module CpOraclecloud
   mattr_accessor :compute_api
   mattr_accessor :storage_api
   mattr_accessor :region
+  mattr_accessor :active_components
 
 	def self.setup
     yield self

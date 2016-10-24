@@ -1,0 +1,13 @@
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Oracle Cloud Platform<span class="caret"></span>
+</button>
+<ul class="dropdown-menu">
+	<% CpOraclecloud.active_components.each do | comp | %>
+		<li>
+		<% if comp == 'Database' %>
+			<%= link_to "Create Database", [@product, CpOraclecloud::DatabaseComponent, action: :new]%>
+		<% elsif comp == 'Java' %>
+			<%= link_to "Create WebLogic", [@product, CpOraclecloud::JavaComponent, action: :new]%>
+		<% end %>
+		</li>
+	<% end %>
+</ul>
