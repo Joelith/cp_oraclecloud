@@ -1,8 +1,8 @@
-# CpOraclecloud
-Short description and motivation.
+# CP_OracleCloud
+Cloud Portal plugin to support the Oracle Cloud Platform.
 
 ## Usage
-How to use my plugin.
+This is included by default in the Cloud Portal project. It relies on that project and will not work stand-alone. 
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -33,7 +33,11 @@ CpOraclecloud.setup do |config|
 end
 ```
 ## Contributing
-Contribution directions go here.
+1. Fork it ( https://github.com/Joelith/cp_oraclecloud )
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
