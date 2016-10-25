@@ -1,0 +1,37 @@
+<em>Required fields are on the General and Database tabs. You can ignore the rest if needed</em>
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#general" data-toggle="tab">* General</a></li>
+  <li role="presentation"><a href="#database" data-toggle="tab">Database</a></li>
+  <li role="presentation"><a href="#storage" data-toggle="tab">Storage</a></li>
+  <li role="presentation"><a href="#networking" data-toggle="tab">Networking</a></li>
+</ul>
+
+
+<div class="tab-content ">
+  <div class="tab-pane active" id="general">
+		<%= f.input :service_name %>
+		<%= f.input :description %>
+		<%= f.input :topology %>
+		<%= f.input :shape %>
+		<%= f.input :num_nodes, label: 'Managed Server Count', as: :integer, hint: 'Valid values: 1, 2, 4, 8' %>
+		<%= f.input :version %>
+		<%= f.input :ssh_key %>
+		<%= f.input :admin_username %>
+		<%= f.input :admin_password, input_html: { value: @component.admin_password } %>
+	</div>
+	<div class="tab-pane" id="storage">
+		<em>If you leave these blank, the system will create a storage container with the name '%service_name%_backup'</em>
+		<%= f.input :cloud_storage_container %>
+		<%= f.input :cloud_storage_user %>
+		<%= f.input :cloud_storage_pwd, input_html: { value: @component.cloud_storage_pwd }%>
+	</div>
+	<div class="tab-pane" id="database">
+		<em>If you leave these blank, the system will create a Enterprise Edition (12.1.0.2) Database of size 'oc3' with the name '%service_name%-DB'</em>
+		<%= f.input :db_service_name %>
+		<%= f.input :dba_name %>
+		<%= f.input :dba_password, input_html: { value: @component.dba_password }%>		
+	</div>
+	<div class="tab-pane" id="networking">
+		<%= f.input :provision_otd, as: :boolean %>
+	</div>
+</div>

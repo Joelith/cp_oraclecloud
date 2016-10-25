@@ -1,0 +1,8 @@
+<dl class="dl-horizontal">
+	<% ['description', 'status', 'shape', 'level', 'edition', 'version', 'service_uri'].each { |a| %>
+		<% if instance.attr_get(a).present? then %>
+			<dt><%= a.titleize() %></dt>
+			<dd><%= instance.attr_get(a) %></dd>
+		<% end %>
+ 	<% } %>
+</dl>

@@ -28,20 +28,6 @@ module CpOraclecloud
       end
     end
 
-    # These should be constants, can't work out
-    # how to access them that way though
-    def self.provider
-      "OracleCloud"
-    end
-
-    def provider
-      "OracleCloud"
-    end
-
-    def fog_type
-      "Database"
-    end
-
     def instance_type
       "CpOraclecloud::DatabaseInstance"
     end

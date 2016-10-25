@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 		namespace :cp_oraclecloud do
 			resources :database_components, type: 'CpOraclecloud::DatabaseComponent'
 			resources :java_components, type: 'CpOraclecloud::JavaComponent'
+			resources :soa_components, type: 'CpOraclecloud::SoaComponent'
 		end
 	end
 
@@ -13,5 +14,6 @@ Rails.application.routes.draw do
 		resources :java_instances, type: 'CpOraclecloud::JavaInstance' do
 			put :backup
 		end
+		resources :soa_instances, type: 'CpOraclecloud::SoaInstance'
 	end
 end
