@@ -30,10 +30,10 @@ CpOraclecloud.setup do |config|
   config.region = <region, remove if using US data centres>
   config.compute_api = <compute url>
   config.storage_api = <storage url>
-  config.active_components = ['Database', 'Java']
+  config.active_components = ['Database', 'Java', 'SOA']
 end
 ```
-The *active_components* option configures which components can be created in the cloud. Supported options are 'Database' and 'Java'. Remove any services you aren't subscribed to. 
+The *active_components* option configures which components can be created in the cloud. Supported options are 'Database', 'Java' and 'SOA'. Remove any services you aren't subscribed to. 
 
 ## Contributing
 1. Fork it ( https://github.com/Joelith/cp_oraclecloud )
