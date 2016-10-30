@@ -1,5 +1,7 @@
 module CpOraclecloud
   class DatabaseComponent < CloudComponent
+    include CpOraclecloud::DatabaseMixin
+
     store :config, accessors: [:service_name, :version, :description, :ssh_key, :shape, :level, :subscription_type, :edition, :backup_destination, :admin_password], coder: JSON
 
     enum edition: [:SE, :EE, :EE_HP, :EE_EP]

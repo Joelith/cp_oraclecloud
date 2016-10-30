@@ -1,0 +1,5 @@
+<%= f.input :name %>
+<%= f.input :shape %>
+<%= f.input :imagelist, collection: @component.all_image_lists, value_method: lambda{|i| i.name} %>
+<%= f.input :label %>
+<%= f.input :sshkeys, collection: @component.all_ssh_keys, value_method: lambda{|s| s.name}, hint: "#{link_to 'Manage SSH Keys', cp_oraclecloud_ssh_keys_path}".html_safe %>

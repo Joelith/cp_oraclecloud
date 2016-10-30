@@ -1,5 +1,6 @@
 module CpOraclecloud
   class JavaInstance < CloudInstance
+    include CpOraclecloud::JavaMixin
 
 		def provision
 			connection.instances.create(init_config)
@@ -32,7 +33,7 @@ module CpOraclecloud
 		end
 
 		def month_cost
-			cost = 0
+			cost = calculate_monthly_cost(init_config)
 			cost
 		end
 

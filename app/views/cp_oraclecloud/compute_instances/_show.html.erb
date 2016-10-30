@@ -1,0 +1,8 @@
+<dl class="dl-horizontal">
+	<% ['name', 'shape'].each { |a| %>
+		<% if instance.attr_get(a).present? then %>
+			<dt><%= a.titleize() %></dt>
+			<dd><%= instance.attr_get(a) %></dd>
+		<% end %>
+ 	<% } %>
+</dl>

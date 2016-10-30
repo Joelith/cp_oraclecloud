@@ -1,6 +1,6 @@
 module CpOraclecloud
-  class SoaInstance < CloudInstance
-    include CpOraclecloud::SoaMixin
+  class ComputeInstance < CloudInstance
+    include CpOraclecloud::ComputeMixin
 
 		def provision
 			connection.instances.create(init_config)
@@ -15,7 +15,7 @@ module CpOraclecloud
 		end
 
 		def cloud_type
-			"SOA"
+			"Compute"
 		end
 
 		def fog
@@ -27,14 +27,13 @@ module CpOraclecloud
 			begin
 				@instance ||= connection.instances.get(name)
 				@instance.attributes[attribute.to_sym]
-			rescue Fog::OracleCloud::Database::NotFound
+			rescue Fog::Compute::OracleCloud::NotFound
 				"Error"
 			end
 		end
 
 		def month_cost
-			cost = calculate_monthly_cost(init_config)
-			cost
+			calculate_monthly_cost(init_config)
 		end
 
 		def calc_cost(start_date, end_date)
@@ -44,12 +43,13 @@ module CpOraclecloud
 		end
 
 		def connection 
-	 		@connection ||= Fog::OracleCloud::SOA.new(
-	      :oracle_username => CpOraclecloud.username,
-	      :oracle_password => CpOraclecloud.password,
-	      :oracle_domain => CpOraclecloud.domain,
-	      :oracle_region => CpOraclecloud.region
-	      )
+      @connection ||= Fog::Compute.new(
+        :provider => 'OracleCloud',
+        :oracle_username => CpOraclecloud.username,
+        :oracle_password => CpOraclecloud.password,
+        :oracle_domain => CpOraclecloud.domain,
+        :oracle_compute_api => CpOraclecloud.compute_api
+        )
 		end
 
 	end

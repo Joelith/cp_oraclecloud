@@ -1,5 +1,6 @@
 module CpOraclecloud
   class DatabaseInstance < CloudInstance
+  	include CpOraclecloud::DatabaseMixin
 
 		def provision
 			@instance = connection.instances.create(init_config)
@@ -32,12 +33,8 @@ module CpOraclecloud
 		end
 
 		def month_cost
-			cost = 0
-			if init_config['edition'] == 'EE_EP' then
-					rc = RateCard.where("provider = ? AND key = ?", provider, 'Database Cloud Service Enterprise Edition Extreme Performance').first
-					rc ? cost = rc.value : 0
-			end
-			cost
+			cost = calculate_monthly_cost(init_config)
+      cost
 		end
 
 		def calc_cost(start_date, end_date)

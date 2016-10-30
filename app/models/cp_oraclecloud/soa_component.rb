@@ -1,5 +1,7 @@
 module CpOraclecloud
   class SoaComponent < CloudComponent
+    include CpOraclecloud::SoaMixin
+
     after_initialize :init
     store :config, accessors: [:service_name, :cloud_storage_container, :cloud_storage_pwd, :cloud_storage_user, :description, :provision_otd, :subscription_type, :level, :topology, :admin_password, :admin_username, :dba_name, :dba_password, :db_service_name, :num_nodes, :shape, :ssh_key, :version], coder: JSON
 

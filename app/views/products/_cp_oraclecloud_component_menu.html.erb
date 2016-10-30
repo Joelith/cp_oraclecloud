@@ -9,6 +9,8 @@
 			<%= link_to "Create WebLogic", [@product, CpOraclecloud::JavaComponent, action: :new]%>
 		<% elsif comp == 'SOA' %>
 			<%= link_to "Create SOA Instance", [@product, CpOraclecloud::SoaComponent, action: :new]%>
+		<% elsif comp == 'Compute' %>
+			<%= link_to "Create Compute Instance", [@product, CpOraclecloud::ComputeComponent, action: :new] %>
 		<% end %>
 		</li>
 	<% end %>
