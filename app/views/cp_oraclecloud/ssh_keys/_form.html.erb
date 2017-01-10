@@ -1,7 +1,7 @@
 <%= simple_form_for(ssh_key) do |f| %>
 
 	<%= f.input :name %>
-	<%= f.input :enabled, as: :boolean %>
+	<%= f.input :enabled, as: :boolean, checked_value: "true", unchecked_value: "false"%>
 	<%= f.input :key, as: :text %>
 	
 	<%= f.button :submit, class: "btn-primary" %>

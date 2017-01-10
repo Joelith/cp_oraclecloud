@@ -1,7 +1,7 @@
 require "cp_oraclecloud/engine"
 
 module CpOraclecloud
-	  extend ActiveSupport::Autoload
+	extend ActiveSupport::Autoload
 
   mattr_accessor :username
   mattr_accessor :password
@@ -20,5 +20,9 @@ module CpOraclecloud
 	def self.setup
     yield self
   end
+
+  def self.to_s
+    "Oracle Cloud"
+  end 
 end
 	

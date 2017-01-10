@@ -2,7 +2,7 @@ module CpOraclecloud
   class ComputeInstance < CloudInstance
     include CpOraclecloud::ComputeMixin
 
-		def provision
+		def _provision
 			connection.instances.create(init_config)
 		end
 
@@ -16,6 +16,10 @@ module CpOraclecloud
 
 		def cloud_type
 			"Compute"
+		end
+
+		def icon
+			"fa-desktop"
 		end
 
 		def fog

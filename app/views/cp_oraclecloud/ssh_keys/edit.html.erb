@@ -1,4 +1,19 @@
-<header>
-	<h1>Edit SSH Key</h1>
-</header>
-<%= render "form", ssh_key: @ssh_key %>
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+  <li class="breadcrumb-item"><%= link_to "Oracle Cloud", cp_oraclecloud_admin_path %></li>
+  <li class="breadcrumb-item active">Edit SSH Key</li>
+
+</ol>
+<div class="card">
+	<div class="card-header">
+    <i class="fa fa-edit"></i>Edit SSH Key
+    <div class="card-actions">
+		  <%= link_to cp_oraclecloud_admin_path do %>
+      	<i class="fa fa-close"></i>
+      <% end %>
+    </div>
+  </div>   	
+  <div class="card-block">
+		<%= render "form", ssh_key: @ssh_key %>
+	</div>
+</div>

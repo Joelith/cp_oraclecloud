@@ -1,13 +1,11 @@
 module CpOraclecloud
-  class SshKey
+  class Image
     include ActiveModel::Validations
     include ActiveModel::Conversion
     extend ActiveModel::Naming
 
-    attr_accessor :id, :uri, :enabled, :key, :name
+    attr_accessor :id, :uri, :name, :default, :description, :entries
 
-    validates :enabled, inclusion: ["true", "false"]
-    validates :key, :presence => true
     validates :name, :presence => true
 
     def initialize(attributes = {})
@@ -38,32 +36,32 @@ module CpOraclecloud
 
     def self.all
       result = []
-      connection.ssh_keys.each { |k| result.push(CpOraclecloud::SshKey.new(k.attributes))}
+      connection.image_lists.each { |k| result.push(CpOraclecloud::Image.new(k.attributes))}
       result
     end
 
     def self.find_by_id(id)
-      data = connection.ssh_keys.get(id)
-      CpOraclecloud::SshKey.new(data.attributes)
+      data = connection.image_lists.get(id)
+      CpOraclecloud::Image.new(data.attributes)
     end
 
     def self.create(params)
-      connection.ssh_keys.create(:name => params[:name],
-                                 :enabled => params[:enabled],
-                                 :key => params[:key])
+      connection.image_lists.create(:name => params[:name],
+                                 :default => params[:default],
+                                 :description => params[:description])
     end
 
     def update(params)
-      fog_key = self.class.connection.ssh_keys.get(id)
+      fog = self.class.connection.image_lists.get(id)
 
-      [:name, :enabled, :key].each do |field|
-        fog_key.attributes[field.to_sym] = params[field.to_sym]
+      [:name, :default, :description].each do |field|
+        fog.attributes[field.to_sym] = params[field.to_sym]
       end
-      fog_key.update
+      fog.update
     end
 
     def self.delete(id)
-      connection.ssh_keys.get(id).destroy
+      connection.image_lists.get(id).destroy
     end
 
     def self.connection

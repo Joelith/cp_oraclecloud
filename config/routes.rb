@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 		resources :soa_instances, type: 'CpOraclecloud::SoaInstance'
 		resources :compute_instances, type: 'CpOraclecloud::SoaInstance'
 		resources	:ssh_keys
+		resources :images
+		get 'admin' => 'admin#dashboard'
 	end
 end

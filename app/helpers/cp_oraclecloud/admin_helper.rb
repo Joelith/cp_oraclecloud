@@ -1,0 +1,2 @@
+module CpOraclecloud::AdminHelper
+end

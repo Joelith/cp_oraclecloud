@@ -1,16 +1,28 @@
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Oracle Cloud Platform<span class="caret"></span>
+<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Oracle Cloud Platform<span class="caret"></span>
 </button>
 <ul class="dropdown-menu">
 	<% CpOraclecloud.active_components.each do | comp | %>
-		<li>
+		<li class="dropdown-item">
 		<% if comp == 'Database' %>
-			<%= link_to "Create Database", [@product, CpOraclecloud::DatabaseComponent, action: :new]%>
+			<%= link_to [@product, CpOraclecloud::DatabaseComponent, action: :new], {title: "Create Oracle Database Cloud Service"} do %>
+				<i class="fa fa-database"></i>
+				Database
+			<% end %>
 		<% elsif comp == 'Java' %>
-			<%= link_to "Create WebLogic", [@product, CpOraclecloud::JavaComponent, action: :new]%>
+			<%= link_to [@product, CpOraclecloud::JavaComponent, action: :new] do %>
+				<i class="fa fae-java"></i>
+				WebLogic
+			<% end %>
 		<% elsif comp == 'SOA' %>
-			<%= link_to "Create SOA Instance", [@product, CpOraclecloud::SoaComponent, action: :new]%>
+			<%= link_to [@product, CpOraclecloud::SoaComponent, action: :new] do %>
+				<i class="fa fa-code-fork"></i>
+				SOA Suite
+			<% end %>
 		<% elsif comp == 'Compute' %>
-			<%= link_to "Create Compute Instance", [@product, CpOraclecloud::ComputeComponent, action: :new] %>
+			<%= link_to [@product, CpOraclecloud::ComputeComponent, action: :new] do %>
+				<i class="fa fa-desktop"></i>
+				Compute Instance
+			<% end %>
 		<% end %>
 		</li>
 	<% end %>

@@ -1,14 +1,15 @@
 module CpOraclecloud
 	module JavaMixin
-		def calculate_monthly_cost(config)
-			if %w(oc3 oc4 oc5 oc6).include? config['shape'] 
+		def calculate_monthly_cost(override=nil)
+			if override.nil? then override = config end
+			if %w(oc3 oc4 oc5 oc6).include? override['shape'] 
 	    	# General Compute
 	    	rates = CpOraclecloud.rate_card[:java]['general']
 	    else 
 	    	# High Memory
 	    	rates = CpOraclecloud.rate_card[:java]['high']
 	    end
-	    case config['edition']
+	    case override['edition']
 	    when 'SE'
 	    	edition_rate = rates['standard']
 	    when 'EE'
@@ -16,9 +17,9 @@ module CpOraclecloud
 	    when 'Suite'
 	    	edition_rate = rates['suite']
 	    end
-	    if config['subscription_type'] == 'MONTHLY' then cost = edition_rate['monthly']
+	    if override['subscription_type'] == 'MONTHLY' then cost = edition_rate['monthly']
 	    else cost = 30 * 24 * edition_rate['hourly'] end
-	    cost = cost * config['num_nodes'].to_f
+	    cost = cost * override['num_nodes'].to_f
 	    cost
 		end
 	end

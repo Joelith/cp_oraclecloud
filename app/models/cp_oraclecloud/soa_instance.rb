@@ -2,7 +2,7 @@ module CpOraclecloud
   class SoaInstance < CloudInstance
     include CpOraclecloud::SoaMixin
 
-		def provision
+		def _provision
 			connection.instances.create(init_config)
 		end
 
@@ -16,6 +16,10 @@ module CpOraclecloud
 
 		def cloud_type
 			"SOA"
+		end
+
+		def icon
+			"fa-code-fork"
 		end
 
 		def fog

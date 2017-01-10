@@ -2,8 +2,12 @@ module CpOraclecloud
   class DatabaseInstance < CloudInstance
   	include CpOraclecloud::DatabaseMixin
 
-		def provision
+		def _provision
 			@instance = connection.instances.create(init_config)
+		end
+
+		def _deprovision
+			fog.destroy()
 		end
 
 		def wait
@@ -18,9 +22,17 @@ module CpOraclecloud
 			"Database"
 		end
 
+		def icon
+			"fa-database"
+		end
+
 		def fog
-			@instance ||= connection.instances.get(name)
-			@instance
+			begin
+				@instance ||= connection.instances.get(name)
+				@instance
+			rescue Fog::OracleCloud::Database::NotFound
+				nil
+			end
 		end
 
 		def attr_get(attribute)

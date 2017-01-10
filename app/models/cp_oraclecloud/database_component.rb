@@ -21,7 +21,7 @@ module CpOraclecloud
     validates :backup_destination, :presence => true
 
     def pretty_type
-      'Oracle Database CS'
+      'Oracle Database Cloud Service'
     end
 
     def pretty_size

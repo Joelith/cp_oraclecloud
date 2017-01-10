@@ -1,37 +1,85 @@
-<dl class="dl-horizontal">
-	<% ['description', 'status', 'shape', 'level', 'edition', 'version', 'service_uri'].each { |a| %>
-		<% if instance.attr_get(a).present? then %>
-			<dt><%= a.titleize() %></dt>
-			<dd><%= instance.attr_get(a) %></dd>
-		<% end %>
- 	<% } %>
-</dl>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<div class="row">
+			<div class="col-xs-6 col-lg-4">
+				<div class="card">
+					<div class="card-block p-a-0 clearfix">
+						<i class="fa fa-dollar bg-primary p-a-2 font-2xl m-r-1 pull-left"></i>
+						<div class="h5 text-primary m-b-0 p-t-1"><%= number_to_currency(instance.month_cost) %></div>
+							<div class="text-muted text-uppercase font-weight-bold font-xs">Cost Per Month</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-lg-4">
+				<div class="card">
+					<div class="card-block p-a-0 clearfix">
+						<i class="fa fa-heartbeat bg-<%= instance.attr_get('status') == 'Running' ? 'success' : 'danger' %> p-a-2 font-2xl m-r-1 pull-left"></i>
+						<div class="h5 text-<%= instance.attr_get('status') == 'Running' ? 'success' : 'danger' %> m-b-0 p-t-1"><%= instance.attr_get('status') %></div>
+							<div class="text-muted text-uppercase font-weight-bold font-xs">Status</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6 col-lg-4">
+				<div class="card">
+					<div class="card-block p-a-0 clearfix">
+						<i class="fa fa-list-alt bg-info p-a-2 font-2xl m-r-1 pull-left"></i>
+						<div class="h5 text-info m-b-0 p-t-1"><%= instance.attr_get('shape').upcase %> - <%= instance.attr_get('edition') %></div>
+							<div class="text-muted text-uppercase font-weight-bold font-xs">Type</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="card">
+				  <div class="card-block">
+				    <div class="row">
+					    <ul class="nav nav-tabs">
+							  <li role="presentation" class="nav-item active"><a href="#servers" data-toggle="tab" class="nav-link">Servers</a></li>
+							</ul>
+							<div class="tab-content ">
+							  <div class="tab-pane active" id="servers">
+							   	<table class="table table-striped table-hover">
+									 	<thead>
+									    <tr>
+									      <th>Hostname</th>
+									      <th>Status</th>
+									      <th>Shape</th>
+									      <th></th>
+									    </tr>
+									  </thead>
+									  <tbody>
+									    <% instance.fog.servers.each {|i| %>
+									    	<tr>
+									    		<td><%= i.hostname %></td>
+									    		<td><%= i.status %></td>
+									    		<td><%= i.shape %></td>
+									    		<td></td>
+									    	</tr>
+									    <% } %>
+									  </tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<div class="card-header">Actions</div>
+			<div class="card-block">
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block">Go to Console</button>
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block">Scale Up</button>
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block">Scale Out</button>
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block">Backup</button>
+				<button type="button" class="btn btn-outline-primary btn-lg btn-block">Restore</button>
 
-<ul class="nav nav-tabs">
-  <li role="presentation" class="active"><a href="#servers" data-toggle="tab">Servers</a></li>
-</ul>
-
-<div class="tab-content ">
-  <div class="tab-pane active" id="servers">
-   	<table class="table table-striped table-hover">
-		 	<thead>
-		    <tr>
-		      <th>Hostname</th>
-		      <th>Status</th>
-		      <th>Shape</th>
-		      <th></th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <% instance.fog.servers.each {|i| %>
-		    	<tr>
-		    		<td><%= i.hostname %></td>
-		    		<td><%= i.status %></td>
-		    		<td><%= i.shape %></td>
-		    		<td></td>
-		    	</tr>
-		    <% } %>
-		  </tbody>
-		</table>
+			</div>
+		</div>
 	</div>
 </div>

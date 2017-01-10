@@ -2,7 +2,7 @@ module CpOraclecloud
   class JavaInstance < CloudInstance
     include CpOraclecloud::JavaMixin
 
-		def provision
+		def _provision
 			connection.instances.create(init_config)
 		end
 
@@ -18,6 +18,10 @@ module CpOraclecloud
 			"Java"
 		end
 
+		def icon
+			"fae-java"
+		end
+
 		def fog
 			@instance ||= connection.instances.get(name)
 			@instance
@@ -25,9 +29,8 @@ module CpOraclecloud
 
 		def attr_get(attribute)
 			begin
-				@instance ||= connection.instances.get(name)
-				@instance.attributes[attribute.to_sym]
-			rescue Fog::OracleCloud::Database::NotFound
+				fog.attributes[attribute.to_sym]
+			rescue Fog::OracleCloud::Java::NotFound
 				"Error"
 			end
 		end

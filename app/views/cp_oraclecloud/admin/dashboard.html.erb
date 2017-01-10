@@ -1,0 +1,178 @@
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><%= link_to "Home",root_path %></li>
+  <li class="breadcrumb-item active">Oracle Cloud Plugin</li>
+</ol>
+<div class="card">
+  <div class="card-block">
+    <div class="row">
+      <div class="col-xs-5">
+        <h4 class="card-title">Oracle Cloud Plugin Administration</h4>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+	<div class="col-lg-8">
+		<div class="row">
+			<div class="col-md-3 col-sm-6">
+				<div class="social-box primary">
+	        <i class="fa fa-database"></i>
+	        <ul>
+	          <li>
+	            <strong><%= @totals[:database][:total] %></strong>
+	            <span>Services</span>
+	          </li>
+	          <li>
+	            <strong><%= number_to_currency(@totals[:database][:cost]) %></strong>
+	            <span>Total Cost</span>
+	          </li>
+	        </ul>
+	    	</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="social-box info">
+	        <i class="fa fae-java"></i>
+	        <ul>
+	          <li>
+	            <strong><%= @totals[:java][:total] %></strong>
+	            <span>Services</span>
+	          </li>
+	          <li>
+	            <strong><%= number_to_currency(@totals[:java][:cost]) %></strong>
+	            <span>Total Cost</span>
+	          </li>
+	        </ul>
+	    	</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="social-box warning">
+	        <i class="fa fa-code-fork"></i>
+	        <ul>
+	          <li>
+	            <strong><%= @totals[:soa][:total] %></strong>
+	            <span>Services</span>
+	          </li>
+	          <li>
+	            <strong><%= number_to_currency(@totals[:soa][:cost]) %></strong>
+	            <span>Total Cost</span>
+	          </li>
+	        </ul>
+	    	</div>
+			</div>
+			<div class="col-md-3 col-sm-6">
+				<div class="social-box danger">
+	        <i class="fa fa-desktop"></i>
+	        <ul>
+	          <li>
+	            <strong><%= @totals[:compute][:total] %></strong>
+	            <span>Services</span>
+	          </li>
+	          <li>
+	            <strong><%= number_to_currency(@totals[:compute][:cost]) %></strong>
+	            <span>Total Cost</span>
+	          </li>
+	        </ul>
+	    	</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="card">
+					<div class="card-header">Instances</div>
+					<div class="card-block">
+		 				<table class="table table-hover table-outline mb-0 hidden-sm-down">
+		          <thead class="thead-default">
+		            <tr>
+		            	<th></th>
+		              <th>Name</th>
+		              <th>Status</th>
+		              <th>Project</th>
+		              <th>Start</th>
+		              <th>End</th>
+		              <th>Monthly Cost</th>
+		            </tr>
+		          </thead>
+		          <tbody>	
+		          	<% @instances.each do |i| %>
+		          		<tr>
+		          			<td><i class="fa <%= i.icon %>"></i></td>
+		          			<td>
+		                  <div><%= i.name %></div>
+		                  <div class="small text-muted">
+		                    <%= i.cloud_type %>
+		                  </div>
+		                </td>
+		          			<td><%= i.status %></td>
+		          			<td><%= link_to i.environment.project.name, i.environment.project %> - <%= link_to i.environment.name, [i.environment.project, i.environment] %></td>
+		          			<td><%= i.environment.start_date %></td>
+		          			<td><%= i.environment.end_date %></td>
+		          			<td><%= number_to_currency(i.month_cost) %></td>
+		          		</tr>
+		          	<% end %>
+		          </tbody>
+		        </table>	
+		        <p class="text-muted">Note: This only includes instances in the Oracle Cloud that are managed by Cloud Portal. There may be other instances in your account not listed here</p>
+			
+		      </div>
+				</div>
+			</div>
+		</div>
+	</div>
+  <div class="col-lg-4">
+  	<div class="row">
+  		<div class="col-xs-12">
+		    <div class="card">
+		      <div class="card-header">SSH Keys
+		        <div class="card-actions">
+		          <%= link_to new_cp_oraclecloud_ssh_key_path do %>
+		            <i class="fa fa-plus"></i>
+		          <% end %>
+		        </div>
+		      </div>
+		      <div class="card-block">
+		      	<ul class="icons-list">
+		          <% @ssh_keys.each do |ssh_key| %>
+		            <li>
+		            	<span class="title"><%= ssh_key %></span>
+			            <div class="pull-right">
+			               <%= link_to "", [:edit, ssh_key],
+			                class: "edit" %>
+			               <%= link_to "", ssh_key, method: :delete,
+		        data: { confirm: "Are you sure you want to delete this SSH Key?"},
+		        class: "delete" %>
+
+			            </div>
+		            </li>
+		          <% end %>
+		        </ul>
+		      </div>
+		    </div>
+	    </div>
+	    <div class="col-xs-12">
+		    <div class="card">
+		      <div class="card-header">Images
+		      	<div class="card-actions">
+
+		      	</div>
+		      </div>
+		      <div class="card-block">
+						<ul class="icons-list">
+		          <% @images.each do |image| %>
+		            <li>
+		            	<span class="title"><%= image %></span>
+			            <div class="pull-right">
+			               <%= link_to "", [:edit, image],
+			                class: "edit" %>
+			               <%= link_to "", image, method: :delete,
+		        data: { confirm: "Are you sure you want to delete this Image?"},
+		        class: "delete" %>
+			            </div>
+		            </li>
+		          <% end %>
+		        </ul>
+		      </div>
+		    </div>
+		  </div>
+    </div>
+  </div>
+</div>
